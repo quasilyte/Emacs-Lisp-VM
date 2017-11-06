@@ -49,7 +49,7 @@ func TestObjectString(t *testing.T) {
 	for i, tt := range tests {
 		have := ObjectString(tt.object)
 		if have != tt.want {
-			t.Errorf("test %d:\nwant: %s\nhave: %s",
+			t.Errorf("test %d:\nwant: `%s`\nhave: `%s`",
 				i, tt.want, have)
 		}
 	}
