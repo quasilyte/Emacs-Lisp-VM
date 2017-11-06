@@ -41,17 +41,17 @@ const (
 	OpConcat4               byte = 0122
 	OpSub1                  byte = 0123
 	OpAdd1                  byte = 0124
-	OpEqlsign               byte = 0125
-	OpGtr                   byte = 0126
-	OpLss                   byte = 0127
-	OpLeq                   byte = 0130
-	OpGeq                   byte = 0131
-	OpDiff                  byte = 0132
-	OpNegate                byte = 0133
+	OpEqlsign               byte = 0125 // `=`
+	OpGtr                   byte = 0126 // `>`
+	OpLss                   byte = 0127 // `<`
+	OpLeq                   byte = 0130 // `<=`
+	OpGeq                   byte = 0131 // `>=`
+	OpDiff                  byte = 0132 // `-`
+	OpNegate                byte = 0133 // Negate number sign
 	OpPlus                  byte = 0134
 	OpMax                   byte = 0135
 	OpMin                   byte = 0136
-	OpMult                  byte = 0137
+	OpMult                  byte = 0137 // `*`
 	OpPoint                 byte = 0140 // Issue#4
 	OpSaveCurrentBuffer     byte = 0141 // Issue#4
 	OpGotoChar              byte = 0142 // Issue#4
@@ -105,8 +105,8 @@ const (
 	OpMatchEnd              byte = 0225 // Issue#4
 	OpUpcase                byte = 0226
 	OpDowncase              byte = 0227
-	OpStringEqlsign         byte = 0230
-	OpStringLss             byte = 0231
+	OpStringEqlsign         byte = 0230 // `string=`
+	OpStringLss             byte = 0231 // `string<`
 	OpEqual                 byte = 0232
 	OpNthCdr                byte = 0233
 	OpElt                   byte = 0234
@@ -118,7 +118,7 @@ const (
 	OpCarSafe               byte = 0242
 	OpCdrSafe               byte = 0243
 	OpNconc                 byte = 0244
-	OpQuo                   byte = 0245
+	OpQuo                   byte = 0245 // `/`
 	OpRem                   byte = 0246
 	OpNumberp               byte = 0247
 	OpIntegerp              byte = 0250
