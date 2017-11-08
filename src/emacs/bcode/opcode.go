@@ -127,11 +127,11 @@ const (
 	OpRgotoIfNonNil         byte = 0254 // Issue#8
 	OpRgotoIfNilElsePop     byte = 0255 // Issue#8
 	OpRgotoIfNonNilElsePop  byte = 0256 // Issue#8
-	BlistN                  byte = 0257
-	BconcatN                byte = 0260
-	BinsertN                byte = 0261
-	BstackSet               byte = 0262
-	BstackSet2              byte = 0263
-	BdiscardN               byte = 0266
-	Bconstant               byte = 0300
+	OpListN                 byte = 0257
+	OpConcatN               byte = 0260
+	OpInsertN               byte = 0261
+	OpStackSet              byte = 0262
+	OpStackSet2             byte = 0263
+	OpDiscardN              byte = 0266
+	OpConstant              byte = 0300
 )
