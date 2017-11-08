@@ -152,6 +152,14 @@ func NewVector(vals []Object) Object {
 	}
 }
 
+// NewCons returns a cons Object initialized with {car, cdr}.
+func NewCons(car, cdr Object) Object {
+	return Object{
+		Type: TypeCons,
+		Ptr:  unsafe.Pointer(&Cons{Car: car, Cdr: cdr}),
+	}
+}
+
 // Bool maps Go boolean value to Emacs Lisp closest equivalents.
 //
 // true => t symbol
