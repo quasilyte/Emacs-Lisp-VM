@@ -1,16 +1,70 @@
 package bcode
 
-// All opcode names are taken from Emacs sources directly.
-// Some of them are not pretty, but it is better
-// than alternative with partial renaming.
-// Octal literals are used with the same rationale.
+// Opcode names are almost identical to Emacs Lisp bytecode specs.
+// There are some differences in opcode suffixes:
+// uint8  arg   => "B"
+// uint16 arg   => "W"
+// implicit arg => "0"..."5"
 const (
-	OpStackRef              byte = 0
-	OpVarref                byte = 010 // Issue#3
-	OpVarset                byte = 020 // Issue#3
-	OpVarbind               byte = 030 // Issue#3
-	OpCall                  byte = 040 // Issue#5
-	OpUnbind                byte = 050 // Issue#3
+	OpStackRef0 byte = 0
+	OpStackRef1      = OpStackRef0 + 1
+	OpStackRef2      = OpStackRef0 + 2
+	OpStackRef3      = OpStackRef0 + 3
+	OpStackRef4      = OpStackRef0 + 4
+	OpStackRef5      = OpStackRef0 + 5
+	OpStackRefB      = OpStackRef0 + 6
+	OpStackRefW      = OpStackRef0 + 7
+
+	// Issue#3
+	OpVarRef0 byte = 010
+	OpVarRef1      = OpVarRef0 + 1
+	OpVarRef2      = OpVarRef0 + 2
+	OpVarRef3      = OpVarRef0 + 3
+	OpVarRef4      = OpVarRef0 + 4
+	OpVarRef5      = OpVarRef0 + 5
+	OpVarRefB      = OpVarRef0 + 6
+	OpVarRefW      = OpVarRef0 + 7
+
+	// Issue#3
+	OpVarSet0 byte = 020
+	OpVarSet1      = OpVarSet0 + 1
+	OpVarSet2      = OpVarSet0 + 2
+	OpVarSet3      = OpVarSet0 + 3
+	OpVarSet4      = OpVarSet0 + 4
+	OpVarSet5      = OpVarSet0 + 5
+	OpVarSetB      = OpVarSet0 + 6
+	OpVarSetW      = OpVarSet0 + 7
+
+	// Issue#3
+	OpVarBind0 byte = 030
+	OpVarBind1      = OpVarBind0 + 1
+	OpVarBind2      = OpVarBind0 + 2
+	OpVarBind3      = OpVarBind0 + 3
+	OpVarBind4      = OpVarBind0 + 4
+	OpVarBind5      = OpVarBind0 + 5
+	OpVarBindB      = OpVarBind0 + 6
+	OpVarBindW      = OpVarBind0 + 7
+
+	// Issue#5
+	OpCall0 byte = 040
+	OpCall1      = OpCall0 + 1
+	OpCall2      = OpCall0 + 2
+	OpCall3      = OpCall0 + 3
+	OpCall4      = OpCall0 + 4
+	OpCall5      = OpCall0 + 5
+	OpCallB      = OpCall0 + 6
+	OpCallW      = OpCall0 + 7
+
+	// Issue#3
+	OpUnbind0 byte = 050
+	OpUnbind1      = OpUnbind0 + 1
+	OpUnbind2      = OpUnbind0 + 2
+	OpUnbind3      = OpUnbind0 + 3
+	OpUnbind4      = OpUnbind0 + 4
+	OpUnbind5      = OpUnbind0 + 5
+	OpUnbindB      = OpUnbind0 + 6
+	OpUnbindW      = OpUnbind0 + 7
+
 	OpPopHandler            byte = 060 // Issue#7
 	OpPushConditionCase     byte = 061 // Issue#7
 	OpPushCatch             byte = 062 // Issue#7
@@ -82,12 +136,12 @@ const (
 	OpNarrowToRegion        byte = 0175 // Issue#4
 	OpWiden                 byte = 0176 // Issue#4
 	OpEndOfLine             byte = 0177 // Issue#4
-	OpConstant2             byte = 0201
-	OpGoto                  byte = 0202
-	OpGotoIfNil             byte = 0203
-	OpGotoIfNonNil          byte = 0204
-	OpGotoIfNilElsePop      byte = 0205
-	OpGotoIfNonNilRlsePop   byte = 0206
+	OpConstantW             byte = 0201
+	OpGotoW                 byte = 0202
+	OpGotoIfNilW            byte = 0203
+	OpGotoIfNonNilW         byte = 0204
+	OpGotoIfNilElsePopW     byte = 0205
+	OpGotoIfNonNilElsePopW  byte = 0206
 	OpReturn                byte = 0207
 	OpDiscard               byte = 0210
 	OpDup                   byte = 0211
@@ -122,16 +176,16 @@ const (
 	OpRem                   byte = 0246
 	OpNumberp               byte = 0247
 	OpIntegerp              byte = 0250
-	OpRgoto                 byte = 0252 // Issue#8
-	OpRgotoIfNil            byte = 0253 // Issue#8
-	OpRgotoIfNonNil         byte = 0254 // Issue#8
-	OpRgotoIfNilElsePop     byte = 0255 // Issue#8
-	OpRgotoIfNonNilElsePop  byte = 0256 // Issue#8
-	OpListN                 byte = 0257
-	OpConcatN               byte = 0260
-	OpInsertN               byte = 0261
-	OpStackSet              byte = 0262
-	OpStackSet2             byte = 0263
-	OpDiscardN              byte = 0266
+	OpRgotoB                byte = 0252 // Issue#8
+	OpRgotoIfNilB           byte = 0253 // Issue#8
+	OpRgotoIfNonNilB        byte = 0254 // Issue#8
+	OpRgotoIfNilElsePopB    byte = 0255 // Issue#8
+	OpRgotoIfNonNilElsePopB byte = 0256 // Issue#8
+	OpListB                 byte = 0257
+	OpConcatB               byte = 0260
+	OpInsertB               byte = 0261
+	OpStackSetB             byte = 0262
+	OpStackSetW             byte = 0263
+	OpDiscardB              byte = 0266
 	OpConstant              byte = 0300
 )
