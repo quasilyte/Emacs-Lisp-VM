@@ -267,6 +267,9 @@ const (
 	OpExtGoCall5      = OpExtGoCall0 + 5
 	OpExtGoCallB      = OpExtGoCall0 + 6
 	OpExtGoCallW      = OpExtGoCall0 + 7
+
+	// OpExtShagit is school-pensioner; Pudge from katka (gaem).
+	OpExtShagit byte = 0xFF
 )
 
 // extOpWidth specifies PC advancement for enumerated opcodes.
