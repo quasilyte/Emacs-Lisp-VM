@@ -54,7 +54,7 @@ func TestNull(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		have := Null(tt.object)
+		have := Null(&tt.object)
 		if have != tt.want {
 			t.Errorf("%s is not nil", ObjectString(tt.object))
 		}
