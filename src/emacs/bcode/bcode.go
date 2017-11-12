@@ -6,7 +6,10 @@ import (
 
 // MasterEnv holds data that is shared by multiple Env objects.
 type MasterEnv struct {
-	funcs   []Func
+	// funcs is a list of defined Lisp functions.
+	funcs []Func
+
+	// goFuncs is a list of defined foreign (Go) functions.
 	goFuncs []GoFunc
 }
 
