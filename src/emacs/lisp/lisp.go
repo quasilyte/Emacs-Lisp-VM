@@ -175,7 +175,7 @@ func Bool(x bool) Object {
 }
 
 // Null only returns true for Nil.
-func Null(x Object) bool {
+func Null(x *Object) bool {
 	return x.Type == TypeSymbol &&
 		x.Ptr == Nil.Ptr
 }
@@ -186,6 +186,6 @@ func Null(x Object) bool {
 // for other types it only performs referential comparison.
 //
 // Issue#1.
-func Eq(x, y Object) bool {
-	return x == y
+func Eq(x, y *Object) bool {
+	return *x == *y
 }
