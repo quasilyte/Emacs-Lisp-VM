@@ -50,6 +50,31 @@ func TestObjectString(t *testing.T) {
 		18: {NewString([]byte("a b c")), `"a b c"`},
 		19: {NewString([]byte(`"""`)), `"""""`},
 		20: {NewString([]byte("\t\n")), "\"\t\n\""},
+
+		21: {NewCons(Nil, Nil), "(nil . nil)"},
+		22: {NewCons(NewInt(1), NewFloat(2.0)), "(1 . 2.0)"},
+		23: {NewCons(NewCons(T, T), T), "((t . t) . t)"},
+		24: {NewCons(T, NewCons(T, T)), "(t . (t . t))"},
+		25: {NewCons(NewCons(T, T), NewCons(T, T)), "((t . t) . (t . t))"},
+
+		26: {
+			NewVector([]Object{
+				NewCons(Nil, T),
+				NewCons(
+					NewVector([]Object{
+						T,
+						NewString([]byte("abc")),
+						T,
+					}),
+					NewVector([]Object{
+						Nil,
+						NewInt(7),
+					}),
+				),
+				T,
+			}),
+			`[(nil . t) ([t "abc" t] . [nil 7]) t]`,
+		},
 	}
 
 	for i, tt := range tests {
