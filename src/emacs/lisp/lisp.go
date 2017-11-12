@@ -91,10 +91,11 @@ func (o *Object) SetFloat(val float64) {
 	*(*float64)(unsafe.Pointer(o)) = val
 }
 
-// Symbol is obarray-local interned string.
+// Symbol is env-local interned string.
 // A symbol name is unique, no two symbols have same name.
 type Symbol struct {
-	Name string
+	Name   string
+	FuncID int
 }
 
 // Vector is a fixed-size dynamic array.
