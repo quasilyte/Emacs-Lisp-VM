@@ -36,6 +36,9 @@ func ObjectString(o Object) string {
 		cdr := ObjectString(cons.Cdr)
 		return fmt.Sprintf("(%s . %s)", car, cdr)
 
+	case TypeString:
+		return `"` + string(o.String().Chars) + `"`
+
 	default:
 		return fmt.Sprint(o)
 	}

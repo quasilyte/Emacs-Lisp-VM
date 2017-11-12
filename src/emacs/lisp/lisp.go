@@ -19,6 +19,7 @@ const (
 	TypeSymbol
 	TypeVector
 	TypeCons
+	TypeString
 )
 
 // Object is universal Emacs Lisp value.
@@ -34,6 +35,7 @@ const (
 //   {Type: TypeSymbol, Ptr: *Symbol}
 //   {Type: TypeVector, Ptr: *Vector}
 //   {Type: TypeCons, Ptr: *Cons}
+//   {Type: TypeString: Ptr: *String}
 type Object struct {
 	// Warning: Num member should always be the first,
 	// because it is accessed via unsafe pointer at zero offset.
@@ -79,6 +81,12 @@ func (o *Object) Cons() *Cons {
 	return (*Cons)(o.Ptr)
 }
 
+// String returns object string value.
+// UB if o.Type is not TypeString.
+func (o *Object) String() *String {
+	return (*String)(o.Ptr)
+}
+
 // SetInt updates object integer value.
 // UB if o.Type is not TypeInt.
 func (o *Object) SetInt(val int64) {
@@ -107,6 +115,12 @@ type Vector struct {
 type Cons struct {
 	Car Object // First (head for lists).
 	Cdr Object // Second (tail for lists).
+}
+
+// String is like Vector, but stores chars instead of
+// arbitrary Lisp objects.
+type String struct {
+	Chars []byte
 }
 
 // Values that are defined by default and considered immutable.
@@ -158,6 +172,14 @@ func NewCons(car, cdr Object) Object {
 	return Object{
 		Type: TypeCons,
 		Ptr:  unsafe.Pointer(&Cons{Car: car, Cdr: cdr}),
+	}
+}
+
+// NewString returns a string Object initialized with chars.
+func NewString(chars []byte) Object {
+	return Object{
+		Type: TypeString,
+		Ptr:  unsafe.Pointer(&String{Chars: chars}),
 	}
 }
 

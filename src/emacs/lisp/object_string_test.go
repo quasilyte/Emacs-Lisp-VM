@@ -44,6 +44,12 @@ func TestObjectString(t *testing.T) {
 			NewVector([]Object{NewVector([]Object{NewVector(nil)})}),
 			"[[[]]]",
 		},
+
+		16: {NewString(nil), `""`},
+		17: {NewString([]byte("")), `""`},
+		18: {NewString([]byte("a b c")), `"a b c"`},
+		19: {NewString([]byte(`"""`)), `"""""`},
+		20: {NewString([]byte("\t\n")), "\"\t\n\""},
 	}
 
 	for i, tt := range tests {
