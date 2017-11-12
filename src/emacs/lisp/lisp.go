@@ -119,6 +119,8 @@ type Cons struct {
 
 // String is like Vector, but stores chars instead of
 // arbitrary Lisp objects.
+//
+// Issue#10.
 type String struct {
 	Chars []byte
 }
