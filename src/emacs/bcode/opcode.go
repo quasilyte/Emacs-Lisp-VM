@@ -6,14 +6,15 @@ package bcode
 // uint16 arg   => "W"
 // implicit arg => "0"..."5"
 const (
-	OpStackRef0 byte = 0
-	OpStackRef1      = OpStackRef0 + 1
-	OpStackRef2      = OpStackRef0 + 2
-	OpStackRef3      = OpStackRef0 + 3
-	OpStackRef4      = OpStackRef0 + 4
-	OpStackRef5      = OpStackRef0 + 5
-	OpStackRefB      = OpStackRef0 + 6
-	OpStackRefW      = OpStackRef0 + 7
+	OpExt byte = 0 // Replaces "stack_ref+0"
+
+	OpStackRef1 byte = 1
+	OpStackRef2 byte = 2
+	OpStackRef3 byte = 3
+	OpStackRef4 byte = 4
+	OpStackRef5 byte = 5
+	OpStackRefB byte = 6
+	OpStackRefW byte = 7
 
 	// Issue#3
 	OpVarRef0 byte = 010
@@ -253,3 +254,32 @@ const (
 	OpConstant62      = OpConstant0 + 62
 	OpConstant63      = OpConstant0 + 63
 )
+
+// Opcodes that are valid after OpExt prefix.
+const (
+	OpExtStop byte = 0
+
+	OpExtGoCall0 byte = 1
+	OpExtGoCall1      = OpExtGoCall0 + 1
+	OpExtGoCall2      = OpExtGoCall0 + 2
+	OpExtGoCall3      = OpExtGoCall0 + 3
+	OpExtGoCall4      = OpExtGoCall0 + 4
+	OpExtGoCall5      = OpExtGoCall0 + 5
+	OpExtGoCallB      = OpExtGoCall0 + 6
+	OpExtGoCallW      = OpExtGoCall0 + 7
+)
+
+// extOpWidth specifies PC advancement for enumerated opcodes.
+var extOpWidth = [256]uint32{
+	// OpExtStop does not modify PC as it stops evaluation when executed.
+	OpExtStop: 0,
+
+	OpExtGoCall0: 2,
+	OpExtGoCall1: 2,
+	OpExtGoCall2: 2,
+	OpExtGoCall3: 2,
+	OpExtGoCall4: 2,
+	OpExtGoCall5: 2,
+	OpExtGoCallB: 2,
+	OpExtGoCallW: 2,
+}
