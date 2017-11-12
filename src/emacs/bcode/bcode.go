@@ -1,6 +1,38 @@
 package bcode
 
-import "emacs/lisp"
+import (
+	"emacs/lisp"
+)
+
+// MasterEnv holds data that is shared by multiple Env objects.
+type MasterEnv struct {
+	funcs   []Func
+	goFuncs []GoFunc
+}
+
+// Env is a context that can be used to perform code evaluation.
+// It is not thread/goroutine safe,
+// each asynchronously running code should have it's own Env.
+type Env struct {
+	// stack holds local values that are pushed and popped
+	// during evaluation.
+	//
+	// Shared across all activation records.
+	//
+	// len(stack) limits total data stack space available.
+	stack []lisp.Object
+
+	// frames saves previous activation record evaluation state.
+	// When function returns, this information is used to continue
+	// code execution.
+	//
+	// len(frames) limits call depth.
+	frames []callFrame
+
+	// MasterEnv holds information that is not required
+	// to be bound to particular execution thread.
+	*MasterEnv
+}
 
 // GoFunc is a type for Go functions that are callable
 // from byte code via special opcode.
