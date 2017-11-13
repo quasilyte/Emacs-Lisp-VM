@@ -5,7 +5,10 @@ import (
 	"testing"
 )
 
-const getsetRepeats = 64
+const (
+	getsetRepeats = 64
+	sumCount      = 32
+)
 
 func TestObjectInt(t *testing.T) {
 	for i := 0; i < getsetRepeats; i++ {
@@ -21,6 +24,22 @@ func TestObjectInt(t *testing.T) {
 			t.Fatalf("GetInt():\nwant: %v\nhave: %v",
 				x2, o.Int())
 		}
+	}
+
+	xs := make([]Object, sumCount)
+	for i := range xs {
+		xs[i].Type = TypeInt
+		xs[i].SetInt(int64(i))
+	}
+	sumHave := int64(0)
+	sumWant := int64(0)
+	for i := range xs {
+		sumHave += xs[i].Int()
+		sumWant += int64(i)
+	}
+	if sumHave != sumWant {
+		t.Fatalf("sum 0..%d:\nhave: %d\nwant: %d",
+			sumCount, sumHave, sumWant)
 	}
 }
 
@@ -38,6 +57,22 @@ func TestObjectFloat(t *testing.T) {
 			t.Fatalf("GetFloat():\nwant: %v\nhave: %v",
 				x2, o.Float())
 		}
+	}
+
+	xs := make([]Object, sumCount)
+	for i := range xs {
+		xs[i].Type = TypeFloat
+		xs[i].SetFloat(float64(i))
+	}
+	sumHave := float64(0)
+	sumWant := float64(0)
+	for i := range xs {
+		sumHave += xs[i].Float()
+		sumWant += float64(i)
+	}
+	if sumHave != sumWant {
+		t.Fatalf("sum 0..%d:\nhave: %f\nwant: %f",
+			sumCount, sumHave, sumWant)
 	}
 }
 
